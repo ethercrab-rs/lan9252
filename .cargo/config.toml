@@ -1,0 +1,10 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+# STM32F407ZGTx is the F407 running on the AliExpress devboard.
+runner = "probe-rs run --chip STM32F407ZGTx"
+rustflags = ["-C", "link-args=--nmagic -Tlink.x -Tdefmt.x"]
+
+[build]
+target = "thumbv7em-none-eabi"
+
+[env]
+DEFMT_LOG = "trace"
