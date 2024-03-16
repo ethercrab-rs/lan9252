@@ -1,4 +1,4 @@
-//! Set comm mode of LAN9252 in EEPROM.
+//! Read/write EEPROM attached to LAN9252.
 
 #![no_std]
 #![no_main]
@@ -19,7 +19,7 @@ bind_interrupts!(struct Irqs {
     I2C1_ER => i2c::ErrorInterruptHandler<peripherals::I2C1>;
 });
 
-/// Original EEPROM data dumped.
+/// Original EEPROM data dumped from an Aliexpress dev board.
 const ORIGINAL: [u8; 12] = [137, 14, 128, 204, 136, 19, 0, 0, 0, 0, 0, 128];
 
 /// 12.14.24 PDI CONTROL REGISTER
@@ -43,7 +43,7 @@ async fn main(_spawner: Spawner) {
         Default::default(),
     );
 
-    // // Write comm mode config to address 0
+    // // Uncomment to write comm mode config to address 0
     // i2c.blocking_write(ADDRESS, &[0x00, 0x00, COMM_MODE_HBI_1PH_16BIT])
     //     .expect("Write byte");
 
