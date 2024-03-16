@@ -14,4 +14,4 @@ made this mistake too many times!
 
 The dev board can be fully assembled and powered to read/write the EEPROM.
 
-The white soldere wire is SCL.
+The white soldered wire is SCL.
