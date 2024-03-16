@@ -20,12 +20,14 @@ bind_interrupts!(struct Irqs {
 });
 
 /// Original EEPROM data dumped from an Aliexpress dev board.
-const ORIGINAL: [u8; 12] = [137, 14, 128, 204, 136, 19, 0, 0, 0, 0, 0, 128];
+const ORIGINAL: [u8; 12] = [0x89, 14, 128, 204, 136, 19, 0, 0, 0, 0, 0, 128];
 
 /// 12.14.24 PDI CONTROL REGISTER
 const COMM_MODE_SPI: u8 = 0x80;
 /// Original control mode of AliExpress firmware.
-const COMM_MODE_HBI_1PH_16BIT: u8 = 137;
+const COMM_MODE_HBI_1PH_16BIT: u8 = 0x89; // 137 decimal
+/// Simple digital IO.
+const COMM_MODE_DIG_IO: u8 = 0x04;
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) {
@@ -44,7 +46,7 @@ async fn main(_spawner: Spawner) {
     );
 
     // // Uncomment to write comm mode config to address 0
-    // i2c.blocking_write(ADDRESS, &[0x00, 0x00, COMM_MODE_HBI_1PH_16BIT])
+    // i2c.blocking_write(ADDRESS, &[0x00, 0x00, COMM_MODE_DIG_IO])
     //     .expect("Write byte");
 
     Timer::after_millis(100).await;
